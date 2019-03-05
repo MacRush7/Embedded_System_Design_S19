@@ -67,6 +67,19 @@
 //   Oct 2016 (updated) | November 2013 (created)
 //   Built with CCSv6.1, IAR, Keil, GCC
 //******************************************************************************
+//  This code has been modified by Rushi James Macwan.
+//
+//  Credits and Courtesy to the original owner of this work (Dung Dang
+//  and Texas Instruments Inc.).
+//
+//  The code is modified by Rushi James Macwan and has been used only for academic
+//  purposes to serve as a lab submission work. The modified parts are added with
+//  appropriate comments wherever necessary to keep the original owner's work intact.
+//  All original work from the third-party has been completely acknowledged before
+//  submitting this work as a lab assignment for the ESDS-19 class.
+//
+//  Thanks.
+//******************************************************************************
 
 #include "ti/devices/msp432p4xx/inc/msp.h"
 int main(void)
