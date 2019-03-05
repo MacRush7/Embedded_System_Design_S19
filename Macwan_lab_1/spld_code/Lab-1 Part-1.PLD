@@ -1,0 +1,45 @@
+Name            ESD LAB-1 Part-1;
+Partno          ATF16V8C;
+Revision        00;
+Date            01/25/2019;
+Designer        Rushi James Macwan;
+Company         CU Boulder;
+Location        None;
+Assembly        None;
+Device          g16v8a; 
+
+
+
+/****************************************************************/
+/*                                                              */
+
+/*                                                              */
+/****************************************************************/
+
+/*
+ * Inputs: 
+ */
+
+Pin 2 = A15;
+Pin 14 = A14;
+Pin 13 = A13;
+Pin 12 = A12;
+Pin 3 = RD;
+Pin 17 = PSEN;
+
+/*
+ * Outputs:
+ */
+
+Pin 18 = READ;
+Pin 19 = CSPERIPH;
+
+
+/*
+ * Logic:   */
+
+READ 		= RD & PSEN;				// append something to show the active low config
+CSPERIPH 	= !(A15 & A14 & A13 & A12);
+
+
+

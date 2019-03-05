@@ -1,0 +1,22 @@
+Name     ESD LAB-1 Part-1;
+PartNo   ATF16V8C;
+Date     01/25/2019;
+Revision 00;
+Designer Rushi James Macwan;
+Company  CU Boulder;
+Assembly None;
+Location None;
+Device   g16v8a;
+
+
+ORDER: A12, A13, A14, A15, CSPERIPH, PSEN, RD, READ; 
+
+
+VECTORS:
+1111*11*
+0111*11*
+1001*01*
+1010*11*
+0101*10*
+1001*00*
+1110*11*
