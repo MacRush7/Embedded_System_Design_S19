@@ -94,6 +94,9 @@ int main(void) {
     // Test pins
     P3->DIR |= BIT6;
     P3->OUT |= BIT6;
+    P2->DIR = (BIT1 | BIT2);        //Additional features from the 19-C problem
+    P2->OUT = BIT1;                 //Additional features from the 19-C problem
+
 
     TIMER_A0->CCTL[0] = TIMER_A_CCTLN_CCIE; // TACCR0 interrupt enabled
     TIMER_A0->CCR[0] = 0;                   // TA 0 starts counting from 0
@@ -167,6 +170,9 @@ void TA0_0_IRQHandler(void)
            TIMER_A0->CCR[0] += 10185;       // Adding that extra 0.155 times of timer rotation
            P1->OUT ^= BIT0;                 // LED Toggling
            P3->OUT ^= BIT6;
+           P2->OUT ^= BIT1;                 //Additional toggling features from the 19-C problem
+           if(P2->OUT != BIT1)
+               P2->OUT ^= BIT2;
         }
 }
 
