@@ -82,6 +82,7 @@
 //******************************************************************************
 
 #include "ti/devices/msp432p4xx/inc/msp.h"
+
 int main(void)
 {
     // Hold the watchdog
@@ -103,8 +104,8 @@ int main(void)
 
     /////////////////////////
     // Configure GPIO
-        P2->DIR |= (BIT1 | BIT2);
-        P2->OUT |= (BIT1 | BIT2);
+        P2->DIR = (BIT1 | BIT2);
+        P2->OUT = BIT1;
     ////////////////////////
 
     // Enable Port 1 interrupt on the NVIC
@@ -151,12 +152,13 @@ void PORT1_IRQHandler(void)
 
     // Toggling the output on the LED
     if(P1->IFG & BIT4)
-    //P1->OUT ^= BIT0;
-    P2->OUT ^= BIT1;    // Port-2 toggling
+        P1->OUT ^= BIT0;
+        P2->OUT ^= BIT1;
+    if(P2->OUT != BIT1)
+        P2->OUT ^= BIT2;
 
     // Delay for switch debounce
     for(i = 0; i < 10000; i++)
-
     P1->IFG &= ~BIT4;
-    P2->IFG &= ~BIT2;   // Adding Port-2 bit selection
+
 }

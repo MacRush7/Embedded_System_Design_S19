@@ -1,17 +1,17 @@
 ******************************************************************************
                   TI ARM Linker PC v18.1.5                     
 ******************************************************************************
->> Linked Mon Mar  4 23:44:40 2019
+>> Linked Wed Mar  6 20:52:39 2019
 
 OUTPUT FILE NAME:   <msp432p401x_p1_03_MSP_EXP432P401R_nortos_ccs.out>
-ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000345
+ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000351
 
 
 MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  MAIN                  00000000   00040000  0000038a  0003fc76  R  X
+  MAIN                  00000000   00040000  00000396  0003fc6a  R  X
   INFO                  00200000   00004000  00000000  00004000  R  X
   SRAM_CODE             01000000   00010000  00000200  0000fe00  RW X
   SRAM_DATA             20000000   00010000  00000200  0000fe00  RW  
@@ -21,9 +21,9 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    0000038a   0000038a    r-x
+00000000    00000000    00000396   00000396    r-x
   00000000    00000000    000000e4   000000e4    r-- .intvecs
-  000000e4    000000e4    000002a6   000002a6    r-x .text
+  000000e4    000000e4    000002b2   000002b2    r-x .text
 2000fe00    2000fe00    00000200   00000000    rw-
   2000fe00    2000fe00    00000200   00000000    rw- .stack
 
@@ -36,15 +36,15 @@ section   page    origin      length       input sections
 .intvecs   0    00000000    000000e4     
                   00000000    000000e4     startup_msp432p401r_ccs.obj (.intvecs:retain)
 
-.text      0    000000e4    000002a6     
-                  000000e4    00000190     msp432p401x_p1_03.obj (.text:main)
-                  00000274    00000078     system_msp432p401r.obj (.text:SystemInit)
-                  000002ec    00000058     msp432p401x_p1_03.obj (.text:PORT1_IRQHandler)
-                  00000344    00000030     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.text:_c_int00_noinit_noargs:_c_int00_noinit_noargs)
-                  00000374    0000000c     startup_msp432p401r_ccs.obj (.text:Reset_Handler)
-                  00000380    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
-                  00000384    00000004                                   : exit.c.obj (.text:abort:abort)
-                  00000388    00000002     startup_msp432p401r_ccs.obj (.text:Default_Handler)
+.text      0    000000e4    000002b2     
+                  000000e4    00000188     msp432p401x_p1_03.obj (.text:main)
+                  0000026c    00000078     system_msp432p401r.obj (.text:SystemInit)
+                  000002e4    0000006c     msp432p401x_p1_03.obj (.text:PORT1_IRQHandler)
+                  00000350    00000030     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.text:_c_int00_noinit_noargs:_c_int00_noinit_noargs)
+                  00000380    0000000c     startup_msp432p401r_ccs.obj (.text:Reset_Handler)
+                  0000038c    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00000390    00000004                                   : exit.c.obj (.text:abort:abort)
+                  00000394    00000002     startup_msp432p401r_ccs.obj (.text:Default_Handler)
 
 .cinit     0    00000000    00000000     UNINITIALIZED
 
@@ -62,10 +62,10 @@ MODULE SUMMARY
        Module                        code   ro data   rw data
        ------                        ----   -------   -------
     .\
-       msp432p401x_p1_03.obj         488    0         0      
+       msp432p401x_p1_03.obj         500    0         0      
        system_msp432p401r.obj        120    0         0      
     +--+-----------------------------+------+---------+---------+
-       Total:                        608    0         0      
+       Total:                        620    0         0      
                                                              
     .\ccs\
        startup_msp432p401r_ccs.obj   14     228       0      
@@ -81,69 +81,69 @@ MODULE SUMMARY
                                                              
        Stack:                        0      0         1024   
     +--+-----------------------------+------+---------+---------+
-       Grand Total:                  678    228       1024   
+       Grand Total:                  690    228       1024   
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
 
 address   name                  
 -------   ----                  
-00000389  ADC14_IRQHandler      
-00000389  AES256_IRQHandler     
-00000389  BusFault_Handler      
-00000385  C$$EXIT               
-00000389  COMP_E0_IRQHandler    
-00000389  COMP_E1_IRQHandler    
-00000389  CS_IRQHandler         
-00000389  DMA_ERR_IRQHandler    
-00000389  DMA_INT0_IRQHandler   
-00000389  DMA_INT1_IRQHandler   
-00000389  DMA_INT2_IRQHandler   
-00000389  DMA_INT3_IRQHandler   
-00000389  DebugMon_Handler      
-00000389  Default_Handler       
-00000389  EUSCIA0_IRQHandler    
-00000389  EUSCIA1_IRQHandler    
-00000389  EUSCIA2_IRQHandler    
-00000389  EUSCIA3_IRQHandler    
-00000389  EUSCIB0_IRQHandler    
-00000389  EUSCIB1_IRQHandler    
-00000389  EUSCIB2_IRQHandler    
-00000389  EUSCIB3_IRQHandler    
-00000389  FLCTL_IRQHandler      
-00000389  FPU_IRQHandler        
-00000389  HardFault_Handler     
-00000389  MemManage_Handler     
-00000389  NMI_Handler           
-00000389  PCM_IRQHandler        
-000002ed  PORT1_IRQHandler      
-000002ed  PORT1_IRQHandler      
-00000389  PORT2_IRQHandler      
-00000389  PORT3_IRQHandler      
-00000389  PORT4_IRQHandler      
-00000389  PORT5_IRQHandler      
-00000389  PORT6_IRQHandler      
-00000389  PSS_IRQHandler        
-00000389  PendSV_Handler        
-00000389  RTC_C_IRQHandler      
-00000375  Reset_Handler         
-00000389  SVC_Handler           
-00000389  SysTick_Handler       
-00000275  SystemInit            
-00000389  T32_INT1_IRQHandler   
-00000389  T32_INT2_IRQHandler   
-00000389  T32_INTC_IRQHandler   
-00000389  TA0_0_IRQHandler      
-00000389  TA0_N_IRQHandler      
-00000389  TA1_0_IRQHandler      
-00000389  TA1_N_IRQHandler      
-00000389  TA2_0_IRQHandler      
-00000389  TA2_N_IRQHandler      
-00000389  TA3_0_IRQHandler      
-00000389  TA3_N_IRQHandler      
-00000389  UsageFault_Handler    
+00000395  ADC14_IRQHandler      
+00000395  AES256_IRQHandler     
+00000395  BusFault_Handler      
+00000391  C$$EXIT               
+00000395  COMP_E0_IRQHandler    
+00000395  COMP_E1_IRQHandler    
+00000395  CS_IRQHandler         
+00000395  DMA_ERR_IRQHandler    
+00000395  DMA_INT0_IRQHandler   
+00000395  DMA_INT1_IRQHandler   
+00000395  DMA_INT2_IRQHandler   
+00000395  DMA_INT3_IRQHandler   
+00000395  DebugMon_Handler      
+00000395  Default_Handler       
+00000395  EUSCIA0_IRQHandler    
+00000395  EUSCIA1_IRQHandler    
+00000395  EUSCIA2_IRQHandler    
+00000395  EUSCIA3_IRQHandler    
+00000395  EUSCIB0_IRQHandler    
+00000395  EUSCIB1_IRQHandler    
+00000395  EUSCIB2_IRQHandler    
+00000395  EUSCIB3_IRQHandler    
+00000395  FLCTL_IRQHandler      
+00000395  FPU_IRQHandler        
+00000395  HardFault_Handler     
+00000395  MemManage_Handler     
+00000395  NMI_Handler           
+00000395  PCM_IRQHandler        
+000002e5  PORT1_IRQHandler      
+000002e5  PORT1_IRQHandler      
+00000395  PORT2_IRQHandler      
+00000395  PORT3_IRQHandler      
+00000395  PORT4_IRQHandler      
+00000395  PORT5_IRQHandler      
+00000395  PORT6_IRQHandler      
+00000395  PSS_IRQHandler        
+00000395  PendSV_Handler        
+00000395  RTC_C_IRQHandler      
+00000381  Reset_Handler         
+00000395  SVC_Handler           
+00000395  SysTick_Handler       
+0000026d  SystemInit            
+00000395  T32_INT1_IRQHandler   
+00000395  T32_INT2_IRQHandler   
+00000395  T32_INTC_IRQHandler   
+00000395  TA0_0_IRQHandler      
+00000395  TA0_N_IRQHandler      
+00000395  TA1_0_IRQHandler      
+00000395  TA1_N_IRQHandler      
+00000395  TA2_0_IRQHandler      
+00000395  TA2_N_IRQHandler      
+00000395  TA3_0_IRQHandler      
+00000395  TA3_N_IRQHandler      
+00000395  UsageFault_Handler    
 4000480c  WDTCTL_SYM            
-00000389  WDT_A_IRQHandler      
+00000395  WDT_A_IRQHandler      
 20010000  __STACK_END           
 00000200  __STACK_SIZE          
 ffffffff  __TI_pprof_out_hndl   
@@ -154,9 +154,9 @@ ffffffff  __binit__
 ffffffff  __c_args__            
 UNDEFED   __mpu_init            
 2000fe00  __stack               
-00000345  _c_int00_noinit_noargs
-00000381  _system_pre_init      
-00000385  abort                 
+00000351  _c_int00_noinit_noargs
+0000038d  _system_pre_init      
+00000391  abort                 
 ffffffff  binit                 
 00000000  interruptVectors      
 000000e5  main                  
@@ -170,64 +170,64 @@ address   name
 00000000  interruptVectors      
 000000e5  main                  
 00000200  __STACK_SIZE          
-00000275  SystemInit            
-000002ed  PORT1_IRQHandler      
-000002ed  PORT1_IRQHandler      
-00000345  _c_int00_noinit_noargs
-00000375  Reset_Handler         
-00000381  _system_pre_init      
-00000385  C$$EXIT               
-00000385  abort                 
-00000389  ADC14_IRQHandler      
-00000389  AES256_IRQHandler     
-00000389  BusFault_Handler      
-00000389  COMP_E0_IRQHandler    
-00000389  COMP_E1_IRQHandler    
-00000389  CS_IRQHandler         
-00000389  DMA_ERR_IRQHandler    
-00000389  DMA_INT0_IRQHandler   
-00000389  DMA_INT1_IRQHandler   
-00000389  DMA_INT2_IRQHandler   
-00000389  DMA_INT3_IRQHandler   
-00000389  DebugMon_Handler      
-00000389  Default_Handler       
-00000389  EUSCIA0_IRQHandler    
-00000389  EUSCIA1_IRQHandler    
-00000389  EUSCIA2_IRQHandler    
-00000389  EUSCIA3_IRQHandler    
-00000389  EUSCIB0_IRQHandler    
-00000389  EUSCIB1_IRQHandler    
-00000389  EUSCIB2_IRQHandler    
-00000389  EUSCIB3_IRQHandler    
-00000389  FLCTL_IRQHandler      
-00000389  FPU_IRQHandler        
-00000389  HardFault_Handler     
-00000389  MemManage_Handler     
-00000389  NMI_Handler           
-00000389  PCM_IRQHandler        
-00000389  PORT2_IRQHandler      
-00000389  PORT3_IRQHandler      
-00000389  PORT4_IRQHandler      
-00000389  PORT5_IRQHandler      
-00000389  PORT6_IRQHandler      
-00000389  PSS_IRQHandler        
-00000389  PendSV_Handler        
-00000389  RTC_C_IRQHandler      
-00000389  SVC_Handler           
-00000389  SysTick_Handler       
-00000389  T32_INT1_IRQHandler   
-00000389  T32_INT2_IRQHandler   
-00000389  T32_INTC_IRQHandler   
-00000389  TA0_0_IRQHandler      
-00000389  TA0_N_IRQHandler      
-00000389  TA1_0_IRQHandler      
-00000389  TA1_N_IRQHandler      
-00000389  TA2_0_IRQHandler      
-00000389  TA2_N_IRQHandler      
-00000389  TA3_0_IRQHandler      
-00000389  TA3_N_IRQHandler      
-00000389  UsageFault_Handler    
-00000389  WDT_A_IRQHandler      
+0000026d  SystemInit            
+000002e5  PORT1_IRQHandler      
+000002e5  PORT1_IRQHandler      
+00000351  _c_int00_noinit_noargs
+00000381  Reset_Handler         
+0000038d  _system_pre_init      
+00000391  C$$EXIT               
+00000391  abort                 
+00000395  ADC14_IRQHandler      
+00000395  AES256_IRQHandler     
+00000395  BusFault_Handler      
+00000395  COMP_E0_IRQHandler    
+00000395  COMP_E1_IRQHandler    
+00000395  CS_IRQHandler         
+00000395  DMA_ERR_IRQHandler    
+00000395  DMA_INT0_IRQHandler   
+00000395  DMA_INT1_IRQHandler   
+00000395  DMA_INT2_IRQHandler   
+00000395  DMA_INT3_IRQHandler   
+00000395  DebugMon_Handler      
+00000395  Default_Handler       
+00000395  EUSCIA0_IRQHandler    
+00000395  EUSCIA1_IRQHandler    
+00000395  EUSCIA2_IRQHandler    
+00000395  EUSCIA3_IRQHandler    
+00000395  EUSCIB0_IRQHandler    
+00000395  EUSCIB1_IRQHandler    
+00000395  EUSCIB2_IRQHandler    
+00000395  EUSCIB3_IRQHandler    
+00000395  FLCTL_IRQHandler      
+00000395  FPU_IRQHandler        
+00000395  HardFault_Handler     
+00000395  MemManage_Handler     
+00000395  NMI_Handler           
+00000395  PCM_IRQHandler        
+00000395  PORT2_IRQHandler      
+00000395  PORT3_IRQHandler      
+00000395  PORT4_IRQHandler      
+00000395  PORT5_IRQHandler      
+00000395  PORT6_IRQHandler      
+00000395  PSS_IRQHandler        
+00000395  PendSV_Handler        
+00000395  RTC_C_IRQHandler      
+00000395  SVC_Handler           
+00000395  SysTick_Handler       
+00000395  T32_INT1_IRQHandler   
+00000395  T32_INT2_IRQHandler   
+00000395  T32_INTC_IRQHandler   
+00000395  TA0_0_IRQHandler      
+00000395  TA0_N_IRQHandler      
+00000395  TA1_0_IRQHandler      
+00000395  TA1_N_IRQHandler      
+00000395  TA2_0_IRQHandler      
+00000395  TA2_N_IRQHandler      
+00000395  TA3_0_IRQHandler      
+00000395  TA3_N_IRQHandler      
+00000395  UsageFault_Handler    
+00000395  WDT_A_IRQHandler      
 2000fe00  __stack               
 20010000  __STACK_END           
 4000480c  WDTCTL_SYM            

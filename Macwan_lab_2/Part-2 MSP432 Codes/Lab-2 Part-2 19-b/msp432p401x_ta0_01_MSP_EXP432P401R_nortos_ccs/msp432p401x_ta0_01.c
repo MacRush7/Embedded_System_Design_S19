@@ -80,16 +80,23 @@
 
 #include "ti/devices/msp432p4xx/inc/msp.h"
 
+int j; //global variable
+
 int main(void) {
     WDT_A->CTL = WDT_A_CTL_PW |             // Stop WDT
             WDT_A_CTL_HOLD;
 
     // Configure GPIO
+
     P1->DIR |= BIT0;
     P1->OUT |= BIT0;
 
+    // Test pins
+    P3->DIR |= BIT6;
+    P3->OUT |= BIT6;
+
     TIMER_A0->CCTL[0] = TIMER_A_CCTLN_CCIE; // TACCR0 interrupt enabled
-    TIMER_A0->CCR[0] = 0;
+    TIMER_A0->CCR[0] = 0;                   // TA 0 starts counting from 0
     TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | // SMCLK, continuous mode
             TIMER_A_CTL_MC__CONTINUOUS;
 
@@ -108,15 +115,59 @@ int main(void) {
         __sleep();
 
         __no_operation();                   // For debugger
+
     }
 }
 
 // Timer A0 interrupt service routine
 
-void TA0_0_IRQHandler(void) {
+void TA0_0_IRQHandler(void)
+{
+    j++;    //incrementing variable j every time the Timer 0 interrupt occurs
+
+    /*
+     * The variable j is incremented and used such that the interrupt handler
+     * toggles the LED only after a certain value has been reached. In my
+     * case, a value of 65535 is added to the 16-bit Timer A every time an interrupt
+     * occurs. This 16-bit timer can count from 0 to 65535. The SMCLK clock is used
+     * which uses a frequency of 3 MHz. This means that there will be 3 M cycles per
+     * second for the SMCLK clock.
+     *
+     * Now, the clock period is (1/3M = 0.33u seconds) which implies that for every
+     * 0.33u seconds (meaning one cycle), the timer will increment by one.
+     * In turn, this means that the timer will reach the value 65535 from 0 in
+     * (65535 * 0.3333 u = 21.845 m seconds). Therefore, the timer can count a total
+     * time of 21.845 milli-seconds after which overflow occurs as 65535 when incremented
+     * by one will result in a zero.
+     *
+     * Finally, since we need a toggling time period (on/off time period) of 200
+     * milli-seconds, we will need the timer to count from 0 to 65535 for
+     * (200 ms / 21.845 ms = 9.155 times) which amounts to a rotation from 0 to
+     * 65535 for 9 times and again an increment from 0 to 10185 to achieve an
+     * exact on/off (toggling) time period of 200 milli-seconds.
+     *
+     * Note:- This method of calculating the exact toggling time period of 200ms
+     * takes into account the issue of energy consumption. Since, the interrupt
+     * handler will be called approximately only 9.155 times every time an LED
+     * is toggled (actually more than once since the maximum toggling time period
+     * without a timer overflow is just 21.845 ms while we require 200 ms). This
+     * means lower power consumption since lowering the number of ISR calls, lowers
+     * the spikes in the energy consumption (every time the ISR is called) and
+     * eventually accounts for a more efficient embedded system.
+     *
+     * Credits & Courtesy: I thank Kiran (TA) for helping me deal with the problem
+     * in a very detailed fashion. I acknowledge his help and support for the same.
+     */
+
     TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
-    P1->OUT ^= BIT0;
-    TIMER_A0->CCR[0] += 6060;              // Add Offset to TACCR0
+    TIMER_A0->CCR[0] += 65535;              // Add Offset to TACCR0
+
+    if(j%9 == 0)                            // Performing toggling for every 9 times of timer overflow
+        {
+           TIMER_A0->CCR[0] += 10185;       // Adding that extra 0.155 times of timer rotation
+           P1->OUT ^= BIT0;                 // LED Toggling
+           P3->OUT ^= BIT6;
+        }
 }
 
 
