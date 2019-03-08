@@ -80,7 +80,7 @@
 
 #include "ti/devices/msp432p4xx/inc/msp.h"
 
-int j; //global variable
+int TIMER_OVERFLOW_CNT; //global variable - timer overflow counter variable
 
 int main(void) {
     WDT_A->CTL = WDT_A_CTL_PW |             // Stop WDT
@@ -126,7 +126,7 @@ int main(void) {
 
 void TA0_0_IRQHandler(void)
 {
-    j++;    //incrementing variable j every time the Timer 0 interrupt occurs
+    TIMER_OVERFLOW_CNT++;    //incrementing variable TIMER_OVERFLOW_CNT every time the interrupt occurs
 
     /*
      * The variable j is incremented and used such that the interrupt handler
@@ -144,17 +144,29 @@ void TA0_0_IRQHandler(void)
      * by one will result in a zero.
      *
      * Finally, since we need a toggling time period (on/off time period) of 200
-     * milli-seconds, we will need the timer to count from 0 to 65535 for
-     * (200 ms / 21.845 ms = 9.155 times) which amounts to a rotation from 0 to
-     * 65535 for 9 times and again an increment from 0 to 10185 to achieve an
-     * exact on/off (toggling) time period of 200 milli-seconds.
+     * milli-seconds, we will need break the timer revolutions in terms of whole
+     * numbers. Therefore, we can consider the timer to count for up to 20 ms (lesser
+     * than its maximum ability of 21.845 ms) and then let the timer overflow for
+     * 10 times after which we toggle the LED. This way, we will have a total time
+     * duration of 20ms * 10 (overflows) = 200 milli-seconds before which the LED
+     * will be toggled.
+     *
+     * Now, for the timer to keep incrementing for a period of  20 ms, we will
+     * need the timer to count upto (20 ms * 65535 / 21.845 ms = 60000) after
+     * which we will increment the counter TIMER_OVERFLOW_CNT. As soon as the
+     * counter value reaches 10, it means that a duration of 200ms will have
+     * passed and we will therefore enter a loop to toggle the LED.
+     *
+     * Please Note:- The practical value slightly differs from 60000 because of
+     * internal system aspects. Therefore, proper calibration will be required
+     * and the value might even deviate by 1% (of 65535) from the original value.
+     * In my case, the value exceeds approximately by 0.82% (of 65535) and therefore,
+     * I will be using 60540 instead of 60000.
      *
      * Note:- This method of calculating the exact toggling time period of 200ms
      * takes into account the issue of energy consumption. Since, the interrupt
-     * handler will be called approximately only 9.155 times every time an LED
-     * is toggled (actually more than once since the maximum toggling time period
-     * without a timer overflow is just 21.845 ms while we require 200 ms). This
-     * means lower power consumption since lowering the number of ISR calls, lowers
+     * handler will be called only 10 times for every time an LED is toggled,
+     * lesser power will be consumed. Lowering the number of ISR calls, lowers
      * the spikes in the energy consumption (every time the ISR is called) and
      * eventually accounts for a more efficient embedded system.
      *
@@ -163,17 +175,16 @@ void TA0_0_IRQHandler(void)
      */
 
     TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
-    TIMER_A0->CCR[0] += 65535;              // Add Offset to TACCR0
+    TIMER_A0->CCR[0] += 60540;                      // Add Offset to TACCR0 for a duration of approx. 20 ms
 
-    if(j%9 == 0)                            // Performing toggling for every 9 times of timer overflow
-        {
-           TIMER_A0->CCR[0] += 10185;       // Adding that extra 0.155 times of timer rotation
-           P1->OUT ^= BIT0;                 // LED Toggling
-           P3->OUT ^= BIT6;
-           P2->OUT ^= BIT1;                 //Additional toggling features from the 19-C problem
+    if(TIMER_OVERFLOW_CNT%10 == 0)                  // Letting the timer overflow for 10 times before the LED is toggled
+    {
+           P1->OUT ^= BIT0;                         // LED Toggling
+           P3->OUT ^= BIT6;                         // toggling test point
+           P2->OUT ^= BIT1;                         //Additional toggling features from the 19-C problem
            if(P2->OUT != BIT1)
                P2->OUT ^= BIT2;
-        }
+    }
 }
 
 
