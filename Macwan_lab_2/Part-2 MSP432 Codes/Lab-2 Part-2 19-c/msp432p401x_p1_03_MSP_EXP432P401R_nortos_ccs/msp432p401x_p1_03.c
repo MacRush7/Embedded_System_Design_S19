@@ -68,6 +68,9 @@
 //   Built with CCSv6.1, IAR, Keil, GCC
 //******************************************************************************
 //  This code has been modified by Rushi James Macwan.
+//  All modifications with due respect for copyrights have been cited with the
+//  term - "MODIFICATION-<number>". The MODIFICATIONS do not remove the original
+//  work but only comment the codes as per necessity.
 //
 //  Credits and Courtesy to the original owner of this work (Dung Dang
 //  and Texas Instruments Inc.).
@@ -102,17 +105,17 @@ int main(void)
     P1->IFG = 0;                            // Clear all P1 interrupt flags
     P1->IE = BIT4;                          // Enable interrupt for P1.1
 
-    /////////////////////////
+    //////////////////////////////////MODIFICATION-1
     // Configure GPIO
         P2->DIR = (BIT1 | BIT2);
         P2->OUT = BIT1;
-    ////////////////////////
+    /////////////////////////////////
 
     // Enable Port 1 interrupt on the NVIC
     NVIC->ISER[1] = 1 << ((PORT1_IRQn) & 31);
 
     // Terminate all remaining pins on the device
-    //P2->DIR |= 0xFF; P2->OUT = 0; ////////////CHANGE HERE
+    //P2->DIR |= 0xFF; P2->OUT = 0; ////////////MODIFICATION-2 (Removing P-2 assignments because we will use it)
     P3->DIR |= 0xFF; P3->OUT = 0;
     P4->DIR |= 0xFF; P4->OUT = 0;
     P5->DIR |= 0xFF; P5->OUT = 0;
@@ -153,9 +156,11 @@ void PORT1_IRQHandler(void)
     // Toggling the output on the LED
     if(P1->IFG & BIT4)
         P1->OUT ^= BIT0;
+    //////////////////////////////////MODIFICATION-3
         P2->OUT ^= BIT1;
     if(P2->OUT != BIT1)
         P2->OUT ^= BIT2;
+    //////////////////////////////////
 
     // Delay for switch debounce
     for(i = 0; i < 10000; i++)

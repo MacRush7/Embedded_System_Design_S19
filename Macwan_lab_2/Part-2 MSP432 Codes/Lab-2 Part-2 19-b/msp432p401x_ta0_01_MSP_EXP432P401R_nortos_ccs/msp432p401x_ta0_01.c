@@ -64,6 +64,9 @@
 //   Built with CCSv6.1, IAR, Keil, GCC
 //******************************************************************************
 //  This code has been modified by Rushi James Macwan.
+//  All modifications with due respect for copyrights have been cited with the
+//  term - "MODIFICATION-<number>". The MODIFICATIONS do not remove the original
+//  work but only comment the codes as per necessity.
 //
 //  Credits and Courtesy to the original owner of this work (William Goh
 //  and Texas Instruments Inc.).
@@ -80,7 +83,9 @@
 
 #include "ti/devices/msp432p4xx/inc/msp.h"
 
+//////////////////////////////////MODIFICATION-1
 int TIMER_OVERFLOW_CNT; //global variable - timer overflow counter variable
+//////////////////////////////////
 
 int main(void) {
     WDT_A->CTL = WDT_A_CTL_PW |             // Stop WDT
@@ -91,15 +96,21 @@ int main(void) {
     P1->DIR |= BIT0;
     P1->OUT |= BIT0;
 
+    //////////////////////////////////MODIFICATION-2
+    // Configuring more pins for our use
     // Test pins
     P3->DIR |= BIT6;
     P3->OUT |= BIT6;
     P2->DIR = (BIT1 | BIT2);        //Additional features from the 19-C problem
     P2->OUT = BIT1;                 //Additional features from the 19-C problem
+    //////////////////////////////////
 
 
     TIMER_A0->CCTL[0] = TIMER_A_CCTLN_CCIE; // TACCR0 interrupt enabled
+    //////////////////////////////////MODIFICATION-3
+    // Modified the timer register starting value for my own reference
     TIMER_A0->CCR[0] = 0;                   // TA 0 starts counting from 0
+    //////////////////////////////////
     TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | // SMCLK, continuous mode
             TIMER_A_CTL_MC__CONTINUOUS;
 
@@ -126,7 +137,9 @@ int main(void) {
 
 void TA0_0_IRQHandler(void)
 {
+    //////////////////////////////////MODIFICATION-4
     TIMER_OVERFLOW_CNT++;    //incrementing variable TIMER_OVERFLOW_CNT every time the interrupt occurs
+    //////////////////////////////////
 
     /*
      * The variable j is incremented and used such that the interrupt handler
@@ -175,6 +188,9 @@ void TA0_0_IRQHandler(void)
      */
 
     TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;
+
+    //////////////////////////////////MODIFICATION-5
+    // Modified timer register increment value for my own reference
     TIMER_A0->CCR[0] += 60540;                      // Add Offset to TACCR0 for a duration of approx. 20 ms
 
     if(TIMER_OVERFLOW_CNT%10 == 0)                  // Letting the timer overflow for 10 times before the LED is toggled
@@ -185,6 +201,7 @@ void TA0_0_IRQHandler(void)
            if(P2->OUT != BIT1)
                P2->OUT ^= BIT2;
     }
+    //////////////////////////////////MODIFICATION-5 ends
 }
 
 
