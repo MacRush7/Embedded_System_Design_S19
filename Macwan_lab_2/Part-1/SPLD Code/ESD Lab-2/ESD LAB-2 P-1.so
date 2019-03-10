@@ -1,0 +1,64 @@
+CSIM(WM): CUPL Simulation Program
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+CREATED Sun Mar 10 01:10:31 2019
+
+LISTING FOR SIMULATION FILE: ESD LAB-2 P-1.si
+
+   1: Name     ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   2: PartNo   ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   3: Date     ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   4: Revision ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   5: Designer ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   6: Company  ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   7: Assembly ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   8: Location ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   9: 
+  10: 
+  11: ORDER: A15, ALE, CE_n_1, EA_n, LE_1, LE_2, OE_n_1, RD_n; 
+  12: 
+  13: 
+
+=================
+        C   O    
+        E   E    
+        _ELL_R   
+      AAnAEEnD   
+      1L______   
+      5E1n121n   
+=================
+0001: 11H0HLL0
+0002: 01L0HLL0
+0003: 10H0LHL0
+0004: 00H0LHH1
+0005: 01L0HLL0
+0006: 01H1HLL0
+0007: 00L0LHL0
+0008: 10H0LHL0
+0009: 01L0HLL0
+0010: 00H0LHH1
+0011: 00H1LHL0
