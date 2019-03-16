@@ -1,0 +1,64 @@
+CSIM(WM): CUPL Simulation Program
+Version 5.0a Serial# 
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+CREATED Sun Mar 10 15:45:42 2019
+
+LISTING FOR SIMULATION FILE: LAB-2 PART-1.si
+
+   1: Name     ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   2: PartNo   ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   3: Date     ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   4: Revision ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   5: Designer ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   6: Company  ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   7: Assembly ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   8: Location ;
+               ^
+[0025sa] Please note: inconsistent header information
+
+   9: 
+  10: 
+  11: ORDER: A15, CE_n_1, EA_n, OE_n_1, PSEN_n; 
+  12: 
+  13: 
+
+==============
+       C OP   
+       E ES   
+       _E_E   
+      AnAnN   
+      1____   
+      51n1n   
+==============
+0001: 1H0H1
+0002: 0H0H1
+0003: 0L0L0
+0004: 0L0L0
+0005: 0L0L0
+0006: 1H0L0
+0007: 0L0L0
+0008: 0H0H1
+0009: 0L0L0
+0010: 0L0L0
+0011: 0L0L0

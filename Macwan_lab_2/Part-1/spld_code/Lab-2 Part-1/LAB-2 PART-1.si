@@ -1,0 +1,25 @@
+Name     ;
+PartNo   ;
+Date     ;
+Revision ;
+Designer ;
+Company  ;
+Assembly ;
+Location ;
+
+
+ORDER: A15, CE_n_1, EA_n, OE_n_1, PSEN_n; 
+
+
+VECTORS:
+1*0*1
+0*0*1
+0*0*0
+0*0*0
+0*0*0
+1*0*0
+0*0*0
+0*0*1
+0*0*0
+0*0*0
+0*0*0

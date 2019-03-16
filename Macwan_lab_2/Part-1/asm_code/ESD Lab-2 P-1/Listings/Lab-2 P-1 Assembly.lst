@@ -1,0 +1,143 @@
+A51 MACRO ASSEMBLER  LAB_2_P_1_ASSEMBLY                                                   03/15/2019 22:46:15 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Lab-2 P-1 Assembly.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Lab-2 P-1 Assembly.asm SET(SMALL) DEBUG PRINT(.\Listings\Lab-2 P-1 Asse
+                      mbly.lst) OBJECT(.\Objects\Lab-2 P-1 Assembly.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18     
+                      19     
+                      20     
+                      21     
+                      22     
+                      23     
+                      24     
+                      25     
+                      26     
+                      27     
+                      28     
+                      29     
+                      30     
+                      31     
+                      32     
+                      33     
+                      34     
+                      35     
+                      36     
+                      37     
+                      38     
+                      39     
+                      40     
+                      41     
+                      42     
+                      43                     
+                      44                     
+                      45                     
+                      46                                                             
+                      47                     
+0000                  48                     ORG 0000H                                
+                      49                     
+0000 7400             50                     MOV A, #00H                              
+                      51                                                                     
+                      52                     
+0002 020040           53                     LJMP MAIN                                
+                      54                     
+                      55                     
+                      56                     
+                      57                     
+A51 MACRO ASSEMBLER  LAB_2_P_1_ASSEMBLY                                                   03/15/2019 22:46:15 PAGE     2
+
+                      58                     
+                      59                     
+                      60                     
+                      61                     
+000B                  62                     ORG 000BH                                
+000B B297             63     ISR:    CPL P1.7                                 
+000D C28D             64                     CLR TF0                                  
+                      65                                                                     
+000F 04               66                     INC A                                    
+0010 B40704           67                     CJNE A, #07H, REPEAT     
+0013 7400             68                     MOV A, #00H                              
+0015 B295             69                     CPL P1.5                                 
+0017 B297             70     REPEAT: CPL P1.7                                 
+0019 32               71                     RETI                                     
+                      72                     
+                      73                     
+                      74                     
+                      75                     
+                      76     
+                      77                     
+                      78                     
+                      79                     
+                      80                     
+                      81     
+                      82                     
+0040                  83                     ORG 0040H
+0040 758901           84     MAIN:   MOV TMOD, #01H                   
+0043 758A00           85                     MOV TL0, #00H                    
+0046 758C00           86                     MOV TH0, #00H                    
+0049 75A882           87                     MOV IE, #82H                     
+004C D28C             88                     SETB TR0                                 
+                      89                     
+                      90                     
+                      91                     
+004E 00               92     LOOP:   NOP                                              
+004F 80FD             93                     SJMP LOOP                                
+                      94     
+                      95                     
+                      96                     
+                      97                     
+                      98                     
+                      99                     END
+                                                     
+                             
+                                             
+                                             
+                                                                                     
+                                     
+                                             
+A51 MACRO ASSEMBLER  LAB_2_P_1_ASSEMBLY                                                   03/15/2019 22:46:15 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+ISR. . . . . . . .  C ADDR   000BH   A   
+LOOP . . . . . . .  C ADDR   004EH   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REPEAT . . . . . .  C ADDR   0017H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
