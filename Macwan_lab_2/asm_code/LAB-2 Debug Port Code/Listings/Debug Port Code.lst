@@ -1,0 +1,191 @@
+A51 MACRO ASSEMBLER  DEBUG_PORT_CODE                                                      04/02/2019 17:17:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Debug Port Code.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Debug Port Code.asm SET(SMALL) DEBUG PRINT(.\Listings\Debug Port Code.l
+                      st) OBJECT(.\Objects\Debug Port Code.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18     
+                      19     
+                      20     
+                      21     
+                      22     
+                      23     
+                      24     
+                      25     
+                      26     
+                      27     
+                      28     
+                      29     
+                      30     
+                      31     
+                      32     
+                      33     
+                      34     
+                      35     
+                      36     
+                      37     
+                      38     
+                      39     
+                      40     
+                      41     
+                      42     
+                      43                     
+                      44                             
+                      45                             
+                      46                                                                     
+                      47                             
+                      48                             
+                      49                             
+0000                  50                             ORG 0000H                                
+                      51                                     
+0000 02000E           52                             LJMP MAIN                                
+                      53                             
+                      54                             
+                      55             
+000B                  56                             ORG 000BH                                
+                      57                                                                             
+A51 MACRO ASSEMBLER  DEBUG_PORT_CODE                                                      04/02/2019 17:17:19 PAGE     2
+
+                      58                             
+000B 020126           59                             LJMP ISR_TIMER0                  
+                      60                             
+                      61                             
+                      62                             
+                      63                             
+                      64                             
+                      65     
+000E                  66     MAIN:           
+0100                  67                             ORG 0100H                                
+                      68                                                                             
+                      69                                     
+                      70                             
+                      71                             
+0100 E58E             72                             MOV A, 8EH                               
+0102 54FE             73                             ANL A, #11111110b
+0104 F58E             74                             MOV 8EH, A
+                      75                             
+                      76                             
+                      77                             
+0106 901500           78                             MOV DPTR, #1500H
+0109 7400             79                             MOV A, #00H                              
+                      80                                                                             
+010B F5F0             81                             MOV B, A                                 
+                      82                                                                             
+                      83                             
+010D 758901           84                             MOV TMOD, #01H                   
+0110 758A00           85                             MOV TL0, #00H                    
+0113 758C00           86                             MOV TH0, #00H                    
+0116 75A882           87                             MOV IE, #82H                     
+0119 D28C             88                             SETB TR0                                 
+                      89                             
+                      90                             
+                      91                             
+011B                  92     LOOP:            
+011B 74AA             93                             MOV A, #0AAH
+011D F0               94                             MOVX @DPTR, A
+                      95                             
+011E 00               96                             NOP                                              
+011F 00               97                             NOP                                              
+0120 00               98                             NOP                                              
+                      99                             
+                     100                             
+0121 7455            101                             MOV A, #055H
+0123 F0              102                             MOVX @DPTR, A
+                     103                             
+0124 80F5            104                             SJMP LOOP                                
+                     105     
+                     106                             
+                     107                             
+                     108                             
+                     109                             
+                     110                             
+                     111                             
+                     112                             
+                     113                             
+                     114                             
+                     115                             
+0126                 116     ISR_Timer0:     
+0040                 117                             ORG 0040H                                
+                     118                                                                             
+                     119                             
+                     120                             
+                     121     
+                     122     
+                     123     
+A51 MACRO ASSEMBLER  DEBUG_PORT_CODE                                                      04/02/2019 17:17:19 PAGE     3
+
+                     124     
+                     125     
+                     126     
+                     127     
+                     128     
+                     129     
+                     130                     
+0040 B297            131                             CPL P1.7                                 
+0042 C28D            132                             CLR TF0                                  
+                     133                                                                             
+0044 05F0            134                             INC B                                    
+0046 E5F0            135                             MOV A, B
+0048 B40706          136                             CJNE A, #07H, REPEAT     
+004B 7400            137                             MOV A, #00H                              
+004D F5F0            138                             MOV B, A
+004F B295            139                             CPL P1.5                                 
+0051 B297            140     REPEAT:         CPL P1.7                                 
+0053 32              141                             RETI                                     
+                     142                             
+                     143                             
+                     144                             
+                     145                             
+                     146                             
+                     147                             END
+                                                     
+                                                     
+                                                     
+                                                     
+A51 MACRO ASSEMBLER  DEBUG_PORT_CODE                                                      04/02/2019 17:17:19 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+ISR_TIMER0 . . . .  C ADDR   0126H   A   
+LOOP . . . . . . .  C ADDR   011BH   A   
+MAIN . . . . . . .  C ADDR   000EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REPEAT . . . . . .  C ADDR   0051H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

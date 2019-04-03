@@ -1,0 +1,158 @@
+A51 MACRO ASSEMBLER  LAB_2_FINAL_CODE                                                     04/02/2019 16:46:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\LAB-2 Final Code.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LAB-2 Final Code.asm SET(SMALL) DEBUG PRINT(.\Listings\LAB-2 Final Code
+                      .lst) OBJECT(.\Objects\LAB-2 Final Code.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18     
+                      19     
+                      20     
+                      21     
+                      22     
+                      23     
+                      24     
+                      25     
+                      26     
+                      27     
+                      28     
+                      29     
+                      30     
+                      31     
+                      32     
+                      33     
+                      34     
+                      35     
+                      36     
+                      37     
+                      38     
+                      39     
+                      40     
+                      41     
+                      42     
+                      43                     
+                      44                             
+                      45                             
+                      46                                                                     
+                      47                             
+                      48                             
+                      49                             
+0000                  50                             ORG 0000H                                
+                      51                                     
+0000 02000E           52                             LJMP MAIN                                
+                      53                             
+                      54                             
+                      55             
+000B                  56                             ORG 000BH                                
+                      57                                                                             
+A51 MACRO ASSEMBLER  LAB_2_FINAL_CODE                                                     04/02/2019 16:46:28 PAGE     2
+
+                      58                             
+000B 020119           59                             LJMP ISR_TIMER0                  
+                      60                             
+                      61                             
+                      62                             
+                      63                             
+                      64                             
+                      65     
+000E                  66     MAIN:           
+0100                  67                             ORG 0100H                                
+                      68                                                                             
+                      69                                     
+                      70                             
+                      71                             
+0100 E58E             72                             MOV A, 8EH                               
+0102 54FE             73                             ANL A, #11111110b
+0104 F58E             74                             MOV 8EH, A
+                      75                             
+0106 7400             76                             MOV A, #00H                              
+                      77                                                                             
+                      78                             
+0108 758901           79                             MOV TMOD, #01H                   
+010B 758A00           80                             MOV TL0, #00H                    
+010E 758C00           81                             MOV TH0, #00H                    
+0111 75A882           82                             MOV IE, #82H                     
+0114 D28C             83                             SETB TR0                                 
+                      84                             
+                      85                             
+                      86                             
+0116 00               87     LOOP:           NOP                                              
+0117 80FD             88                             SJMP LOOP                                
+                      89     
+                      90                             
+                      91                             
+                      92                             
+                      93                             
+                      94                             
+                      95                             
+                      96                             
+                      97                             
+                      98                             
+                      99                             
+0119                 100     ISR_Timer0:     
+0040                 101                             ORG 0040H                                
+                     102                                                                             
+0040 B297            103                             CPL P1.7                                 
+0042 C28D            104                             CLR TF0                                  
+                     105                                                                             
+0044 04              106                             INC A                                    
+0045 B40704          107                             CJNE A, #07H, REPEAT     
+0048 7400            108                             MOV A, #00H                              
+004A B295            109                             CPL P1.5                                 
+004C B297            110     REPEAT:         CPL P1.7                                 
+004E 32              111                             RETI                                     
+                     112                             
+                     113                             
+                     114                             
+                     115                             
+                     116                             
+                     117                             END
+                                                     
+                                                     
+                                                     
+                                                     
+A51 MACRO ASSEMBLER  LAB_2_FINAL_CODE                                                     04/02/2019 16:46:28 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+ISR_TIMER0 . . . .  C ADDR   0119H   A   
+LOOP . . . . . . .  C ADDR   0116H   A   
+MAIN . . . . . . .  C ADDR   000EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REPEAT . . . . . .  C ADDR   004CH   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

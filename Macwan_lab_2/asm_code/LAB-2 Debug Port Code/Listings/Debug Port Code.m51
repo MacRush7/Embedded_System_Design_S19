@@ -1,0 +1,86 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/02/2019  17:17:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\Debug Port Code.obj TO .\Objects\Debug Port Code PRINT (.\Listings\Debug Port Code
+>> .m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Debug Port Code.obj (DEBUG_PORT_CODE)
+
+
+LINK MAP OF MODULE:  .\Objects\Debug Port Code (DEBUG_PORT_CODE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0126H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Debug Port Code (DEBUG_PORT_CODE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DEBUG_PORT_CODE
+  D:00F0H         SYMBOL        B
+  D:00A8H         SYMBOL        IE
+  C:0126H         SYMBOL        ISR_TIMER0
+  C:011BH         SYMBOL        LOOP
+  C:000EH         SYMBOL        MAIN
+  D:0090H         SYMBOL        P1
+  C:0051H         SYMBOL        REPEAT
+  B:0088H.5       SYMBOL        TF0
+  D:008CH         SYMBOL        TH0
+  D:008AH         SYMBOL        TL0
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+  C:0000H         LINE#         52
+  C:000BH         LINE#         59
+  C:0100H         LINE#         72
+  C:0102H         LINE#         73
+  C:0104H         LINE#         74
+  C:0106H         LINE#         78
+  C:0109H         LINE#         79
+  C:010BH         LINE#         81
+  C:010DH         LINE#         84
+  C:0110H         LINE#         85
+  C:0113H         LINE#         86
+  C:0116H         LINE#         87
+  C:0119H         LINE#         88
+  C:011BH         LINE#         93
+  C:011DH         LINE#         94
+  C:011EH         LINE#         96
+  C:011FH         LINE#         97
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/02/2019  17:17:19  PAGE 2
+
+
+  C:0120H         LINE#         98
+  C:0121H         LINE#         101
+  C:0123H         LINE#         102
+  C:0124H         LINE#         104
+  C:0040H         LINE#         131
+  C:0042H         LINE#         132
+  C:0044H         LINE#         134
+  C:0046H         LINE#         135
+  C:0048H         LINE#         136
+  C:004BH         LINE#         137
+  C:004DH         LINE#         138
+  C:004FH         LINE#         139
+  C:0051H         LINE#         140
+  C:0053H         LINE#         141
+  -------         ENDMOD        DEBUG_PORT_CODE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0040H BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=294
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
