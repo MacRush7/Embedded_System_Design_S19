@@ -1,0 +1,42 @@
+%SIGNAL
+PIN   3 =  A15 
+PIN  12 =  CE_n_1 
+PIN  16 =  CE_n_2 
+PIN  14 =  CP 
+PIN   5 =  EA_n 
+PIN  13 =  OE_n_1 
+PIN  17 =  OE_n_2 
+PIN   4 =  PSEN_n 
+PIN   6 =  RD_n 
+PIN  18 =  WE_n_2 
+PIN   2 =  WR_n 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CE_n_1 =>
+    EA_n
+  # A15
+  # PSEN_n
+
+CE_n_2 =>
+    !EA_n
+  # A15
+  # RD_n & WR_n
+
+CP =>
+    A15
+  # WR_n
+
+OE_n_1 =>
+    PSEN_n
+
+OE_n_2 =>
+    RD_n
+
+WE_n_2 =>
+    WR_n
+
+%END

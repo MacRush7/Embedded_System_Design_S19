@@ -1,0 +1,140 @@
+Name            ESD LAB-3;
+Partno          ATF16V8C;
+Revision        01;
+Date            03/26/2019;
+Designer        Rushi James Macwan;
+Company         CU Boulder;
+Location        None;
+Assembly        None;
+Device          g16v8a; 
+
+
+
+/****************************************************************/
+/*** PLD CODE - EMBEDDED SYSTEM DESIGN LAB-3 ***/
+/****************************************************************/
+
+/****************************************************************
+ Brief Introduction:
+
+ In this code, four signals have been taken as the input signals
+ to the SPLD. These input signals are as follows:
+ 
+ 1. /EA   - External Access Enable pin on the 8051
+ 2. /WR   - Write control signal pin on the 8051
+ 3. A15   - the MSB of the 8051 16-bit address bus
+ 4. /PSEN - the program store enable pin on the 8051
+
+ Apart from the above input signals, the following signals have
+ been considered as output signals from the SPLD:
+
+ 1. /CE   - NVRAM Chip Enable signal
+ 2. /OE   - NVRAM Chip Enable signal
+ 3. CP    - Clock pulse signal for the debug port latch (7LS374)
+
+ Please Note: All the ACTIVE LOW signals have been appended with
+ an 'n' at the end. For example, the /EA signal has been duly
+ represented as EA_n to abide by the compiler rules in the code
+ design and architecture.
+****************************************************************/
+
+
+/*
+ * Inputs: 
+ */
+
+Pin 2 = WR_n;		// Write signal from 8051
+Pin 3 = A15;		// Address A-15 pin_number of the 8051 MCU
+Pin 4 = PSEN_n;	// Program Store Enable_pin of the 8051 MCU
+Pin 5 = EA_n;		// External Access Enable_pin of the 8051 MCU
+Pin 6 = RD_n;		// Read signal from 8051
+
+/*
+ * Outputs:
+ */
+
+Pin 12 = CE_n_1;	// NVRAM Chip Enable_pin
+Pin 13 = OE_n_1;	// NVRAM Output_Enable_pin
+Pin 14 = CP;		// Clock input for the 74LS374 latch which is active edge-triggered
+
+Pin 16 = CE_n_2;	// NVSRAM Chip Enable pin
+Pin 17 = OE_n_2;	// NVSRAM Output Enable pin
+Pin 18 = WE_n_2;	// NVSRAM Write Enable pin
+
+
+/*
+ * Logic:   */
+
+/*****************************************************************
+ Logic Explanation:
+
+ Here, in this code, the clock pulse that is fed to the debug port
+ latch (7LS374) from the SPLD is represented as CP. This clock
+ pulse decides when the latch updates the D0-D7 data value that is
+ read from the Port-0 of 8051. Since, 8051 will write to an external
+ memory source which is memory mapped in the range 0H - 7FFFH, the
+ A15 pin will be low. Moreover, when the 8051 is attempting to write
+ to an external memory location, the /WR signal will go low. Therefore,
+ in the logic, the CP signal is delivered such that the 8051 is 
+ attempting to write some data to an external memory location. This
+ is achieved by letting the CP (Active High) signal go high only
+ when both the A15 and /WR signals go low which means that the 
+ debug port will update the D0-D7 output only and only when the 
+ controller is writing to an external memory location.
+
+ The second output signal, /CE_1 is the chip enable signal being
+ fed to the NVRAM. This signal essentially should be driven low
+ when the 8051 is attempting to read code from the external 
+ NVRAM memory. This means that the 8051 is performing such
+ operation only when all the three signals (/EA, A15 and /PSEN) go
+ low. This is because /PSEN goes low when the 8051 is reading something
+ from an external memory location and simultaneously when /EA goes
+ low, it represents that the 8051 is reading code from external
+ memory location. A15 pin has to be low once again because the memory
+ map range is 0H - 7FFFH for the NVRAM.
+
+ The third signal, /OE_1 is the output enable signal for the NVRAM.
+ This signal is driven low when the 8051 demands a code data from
+ the NVRAM. Therefore, whenever the 8051 demands such code data,
+ the /PSEN signal goes low. So, whenever the /PSEN goes low,
+ it is interpreted that the 8051 is expecting to read code from the
+ NVRAM and therefore the /OE has to be driven low so that the 
+ 8051 can fetch code from the NVRAM.
+
+ As explained above, /CE_2, /OE_2 and /WR_2 signals are fed to
+ the NVSRAM. The NVSRAM acts as an additional XRAM which 
+ provides an extra data storage space of 31kB in addition to
+ the internal 1kB XRAM available on 8051. The chip is selected
+ whenever a read or write operation is performed by 8051. 
+ Also, the chip is only selected whenever A15 is low to 
+ be within the memory map range of 400-7FFF H. Moreover, care
+ is taken that this data read and write operations are performed
+ only when /EA pin is high (which is one of the requirements for
+ 8051 to play with data that is stored in an external memory).
+ The chip output enable signal is activated only when a read
+ operation is performed by 8051. Similarly, the chip write enable
+ signal is activated only when a write operation is performed by
+ 8051. Please note that all the chip select and enable signals
+ are active low and have been appended with 'n' to represent an
+ active low pin configuration.
+
+****************************************************************/
+
+CP		= !((A15) # (WR_n));				// Clock input for the 74LS374 latch
+
+CE_n_1 		= ((EA_n) # (A15) # (PSEN_n));		// Chip select logic for NVRAM (EPROM) 
+								// Chip is only turned on when the addressing is between 0000H to 7FFFH 
+								// corresponding to program read cycle from the external memory as well
+								// as when the /EA_pin goes low and a read is performed
+
+OE_n_1		= PSEN_n;					// Output Enable_pin of the NVRAM goes low when the chip is selected
+
+CE_n_2		= ((!EA_n) # (A15) # (RD_n & WR_n));		// NVSRAM chip enable logic which is based on the /RD and /WR operations
+
+OE_n_2		= RD_n;						// NVSRAM output enable logic based on the 8051 read signal
+
+WE_n_2		= WR_n;						// NVSRAM write enable logic based on the 8051 write signal
+
+
+
+
