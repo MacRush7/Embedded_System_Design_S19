@@ -16,4 +16,5 @@ Board bring-up involving C8051, oscillators, decoupling caps, reset circuitry, l
 
 # Detailed Project Topics
 
+**Integrated Sensor Network & Cloud Services**
 Exhaustive bare-metal firmware development using TI MSP432, CC3120 BOOST, and sensor fusion coupled with IBM Cloud services.
